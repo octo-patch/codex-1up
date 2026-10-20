@@ -58,32 +58,40 @@ const MINIMAX_PROVIDER_PRESETS: Record<string, Array<[string, string]>> = {
   ],
   minimax_cn: [
     ['name', '"MiniMax (China)"'],
-    ['base_url', '"https://api.minimaxi.com/v1"'],
+    ['base_url', '"https://api.minimax.cn/v1"'],
     ['env_key', '"MINIMAX_API_KEY"'],
     ['wire_api', '"responses"']
   ]
 }
 
 const MINIMAX_PROFILE_PRESETS: Record<string, Array<[string, string]>> = {
+  'minimax-global-m3-flash': [
+    ['model', '"MiniMax-M3.1-Flash"'],
+    ['model_provider', '"minimax_global"'],
+    ['model_context_window', '1000000'],
+    ['model_reasoning_summary', '"none"'],
+    ['web_search', '"disabled"']
+  ],
   'minimax-global-m3': [
     ['model', '"MiniMax-M3"'],
     ['model_provider', '"minimax_global"'],
-    ['model_context_window', '1000000']
+    ['model_context_window', '1000000'],
+    ['model_reasoning_summary', '"none"'],
+    ['web_search', '"disabled"']
   ],
-  'minimax-global-m2-7': [
-    ['model', '"MiniMax-M2.7"'],
-    ['model_provider', '"minimax_global"'],
-    ['model_context_window', '204800']
+  'minimax-cn-m3-flash': [
+    ['model', '"MiniMax-M3.1-Flash"'],
+    ['model_provider', '"minimax_cn"'],
+    ['model_context_window', '1000000'],
+    ['model_reasoning_summary', '"none"'],
+    ['web_search', '"disabled"']
   ],
   'minimax-cn-m3': [
     ['model', '"MiniMax-M3"'],
     ['model_provider', '"minimax_cn"'],
-    ['model_context_window', '1000000']
-  ],
-  'minimax-cn-m2-7': [
-    ['model', '"MiniMax-M2.7"'],
-    ['model_provider', '"minimax_cn"'],
-    ['model_context_window', '204800']
+    ['model_context_window', '1000000'],
+    ['model_reasoning_summary', '"none"'],
+    ['web_search', '"disabled"']
   ]
 }
 

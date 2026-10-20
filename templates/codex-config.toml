@@ -90,7 +90,7 @@ wire_api = "responses"
 
 [model_providers.minimax_cn]
 name = "MiniMax (China)"
-base_url = "https://api.minimaxi.com/v1"
+base_url = "https://api.minimax.cn/v1"
 env_key = "MINIMAX_API_KEY"
 wire_api = "responses"
 
@@ -123,22 +123,31 @@ model_reasoning_summary = "detailed"
 web_search = "live"
 
 # MiniMax profiles inherit the root approval and sandbox settings.
+# Responses supports function tools, not hosted web search or reasoning summaries.
+[profiles.minimax-global-m3-flash]
+model = "MiniMax-M3.1-Flash"
+model_provider = "minimax_global"
+model_context_window = 1000000
+model_reasoning_summary = "none"
+web_search = "disabled"
+
 [profiles.minimax-global-m3]
 model = "MiniMax-M3"
 model_provider = "minimax_global"
 model_context_window = 1000000
+model_reasoning_summary = "none"
+web_search = "disabled"
 
-[profiles.minimax-global-m2-7]
-model = "MiniMax-M2.7"
-model_provider = "minimax_global"
-model_context_window = 204800
+[profiles.minimax-cn-m3-flash]
+model = "MiniMax-M3.1-Flash"
+model_provider = "minimax_cn"
+model_context_window = 1000000
+model_reasoning_summary = "none"
+web_search = "disabled"
 
 [profiles.minimax-cn-m3]
 model = "MiniMax-M3"
 model_provider = "minimax_cn"
 model_context_window = 1000000
-
-[profiles.minimax-cn-m2-7]
-model = "MiniMax-M2.7"
-model_provider = "minimax_cn"
-model_context_window = 204800
+model_reasoning_summary = "none"
+web_search = "disabled"

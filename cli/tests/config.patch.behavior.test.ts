@@ -65,9 +65,42 @@ describe('writeCodexConfig targeted patches', () => {
     expect(data.model_providers.minimax_global.base_url).toBe('https://custom.minimax.invalid/v1')
     expect(data.model_providers.minimax_global.env_key).toBe('MINIMAX_API_KEY')
     expect(data.model_providers.minimax_global.wire_api).toBe('responses')
-    expect(data.model_providers.minimax_cn.base_url).toBe('https://api.minimaxi.com/v1')
+    expect(data.model_providers.minimax_cn.base_url).toBe('https://api.minimax.cn/v1')
     expect(data.profiles['minimax-global-m3'].model).toBe('MiniMax-M3')
-    expect(data.profiles['minimax-cn-m2-7'].model_context_window).toBe(204800)
+    expect(data.profiles['minimax-cn-m3-flash'].model).toBe('MiniMax-M3.1-Flash')
+    expect(data.profiles['minimax-cn-m3-flash'].web_search).toBe('disabled')
+    expect(data.profiles['minimax-cn-m2-7']).toBeUndefined()
+    await cleanup()
+  })
+
+  it('preserves selected legacy profiles, custom models, and provider settings on repeated installs', async () => {
+    const initial = `profile = "minimax-global-m2-7"
+[model_providers.minimax_global]
+base_url = "https://custom.minimax.invalid/v1"
+env_key = "CUSTOM_MINIMAX_KEY"
+wire_api = "responses"
+[profiles.minimax-global-m2-7]
+model = "MiniMax-M2.7"
+model_provider = "minimax_global"
+model_context_window = 204800
+[profiles.minimax-global-m3-flash]
+model = "saved-custom-model"
+model_reasoning_effort = "low"
+web_search = "disabled"
+`
+    const { ctx, cfgPath, cleanup } = await setupContext(initial)
+    ctx.options.profile = 'skip'
+    const before = TOML.parse(initial) as any
+    await writeCodexConfig(ctx)
+    const once = await fs.readFile(cfgPath, 'utf8')
+    await writeCodexConfig(ctx)
+    expect(await fs.readFile(cfgPath, 'utf8')).toBe(once)
+    const data = TOML.parse(once) as any
+    expect(data.profile).toBe(before.profile)
+    expect(data.model_providers.minimax_global).toMatchObject(before.model_providers.minimax_global)
+    expect(data.profiles['minimax-global-m2-7']).toEqual(before.profiles['minimax-global-m2-7'])
+    expect(data.profiles['minimax-global-m3-flash']).toMatchObject(before.profiles['minimax-global-m3-flash'])
+    expect(Object.keys(data.profiles).filter(name => name.includes('m2-7'))).toEqual(['minimax-global-m2-7'])
     await cleanup()
   })
 

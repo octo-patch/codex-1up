@@ -44,29 +44,25 @@ describe('config init/write', () => {
     })
     expect(data.model_providers.minimax_cn).toEqual({
       name: 'MiniMax (China)',
-      base_url: 'https://api.minimaxi.com/v1',
+      base_url: 'https://api.minimax.cn/v1',
       env_key: 'MINIMAX_API_KEY',
       wire_api: 'responses'
     })
-    expect(data.profiles['minimax-global-m3']).toMatchObject({
-      model: 'MiniMax-M3',
-      model_provider: 'minimax_global',
-      model_context_window: 1000000
-    })
-    expect(data.profiles['minimax-global-m2-7']).toMatchObject({
-      model: 'MiniMax-M2.7',
-      model_provider: 'minimax_global',
-      model_context_window: 204800
-    })
-    expect(data.profiles['minimax-cn-m3']).toMatchObject({
-      model: 'MiniMax-M3',
-      model_provider: 'minimax_cn',
-      model_context_window: 1000000
-    })
-    expect(data.profiles['minimax-cn-m2-7']).toMatchObject({
-      model: 'MiniMax-M2.7',
-      model_provider: 'minimax_cn',
-      model_context_window: 204800
-    })
+    const names = Object.keys(data.profiles).filter(name => name.startsWith('minimax-'))
+    expect(names).toEqual([
+      'minimax-global-m3-flash', 'minimax-global-m3',
+      'minimax-cn-m3-flash', 'minimax-cn-m3'
+    ])
+    for (const region of ['global', 'cn']) {
+      for (const [suffix, model] of [['m3-flash', 'MiniMax-M3.1-Flash'], ['m3', 'MiniMax-M3']]) {
+        expect(data.profiles[`minimax-${region}-${suffix}`]).toEqual({
+          model,
+          model_provider: `minimax_${region}`,
+          model_context_window: 1000000,
+          model_reasoning_summary: 'none',
+          web_search: 'disabled'
+        })
+      }
+    }
   })
 })
