@@ -44,7 +44,7 @@ describe('config init/write', () => {
     })
     expect(data.model_providers.minimax_cn).toEqual({
       name: 'MiniMax (China)',
-      base_url: 'https://api.minimax.cn/v1',
+      base_url: 'https://api.minimaxi.com/v1',
       env_key: 'MINIMAX_API_KEY',
       wire_api: 'responses'
     })

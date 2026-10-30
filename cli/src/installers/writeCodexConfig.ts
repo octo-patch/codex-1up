@@ -58,7 +58,7 @@ const MINIMAX_PROVIDER_PRESETS: Record<string, Array<[string, string]>> = {
   ],
   minimax_cn: [
     ['name', '"MiniMax (China)"'],
-    ['base_url', '"https://api.minimax.cn/v1"'],
+    ['base_url', '"https://api.minimaxi.com/v1"'],
     ['env_key', '"MINIMAX_API_KEY"'],
     ['wire_api', '"responses"']
   ]

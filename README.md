@@ -78,8 +78,8 @@ Set `MINIMAX_API_KEY`, then select a regional model profile. Start with Flash:
 | --- | --- | --- |
 | `minimax-global-m3-flash` | `MiniMax-M3.1-Flash` | `https://api.minimax.io/v1` |
 | `minimax-global-m3` | `MiniMax-M3` | `https://api.minimax.io/v1` |
-| `minimax-cn-m3-flash` | `MiniMax-M3.1-Flash` | `https://api.minimax.cn/v1` |
-| `minimax-cn-m3` | `MiniMax-M3` | `https://api.minimax.cn/v1` |
+| `minimax-cn-m3-flash` | `MiniMax-M3.1-Flash` | `https://api.minimaxi.com/v1` |
+| `minimax-cn-m3` | `MiniMax-M3` | `https://api.minimaxi.com/v1` |
 
 For example: `codex --profile minimax-global-m3-flash`.
 

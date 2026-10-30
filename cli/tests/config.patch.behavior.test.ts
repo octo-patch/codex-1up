@@ -65,7 +65,7 @@ describe('writeCodexConfig targeted patches', () => {
     expect(data.model_providers.minimax_global.base_url).toBe('https://custom.minimax.invalid/v1')
     expect(data.model_providers.minimax_global.env_key).toBe('MINIMAX_API_KEY')
     expect(data.model_providers.minimax_global.wire_api).toBe('responses')
-    expect(data.model_providers.minimax_cn.base_url).toBe('https://api.minimax.cn/v1')
+    expect(data.model_providers.minimax_cn.base_url).toBe('https://api.minimaxi.com/v1')
     expect(data.profiles['minimax-global-m3'].model).toBe('MiniMax-M3')
     expect(data.profiles['minimax-cn-m3-flash'].model).toBe('MiniMax-M3.1-Flash')
     expect(data.profiles['minimax-cn-m3-flash'].web_search).toBe('disabled')
